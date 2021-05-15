@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <head th:replace="common/header :: header"></head>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header" style="text-align: center">
+                <h4 th:text="${error}"></h4>
+                <a  id="url" th:href="${url}">3秒钟后自动切换页面</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    setTimeout(function(){
+        const url=document.getElementById("url").getAttribute("href")
+        location.href=url
+    },3000)
+
+</script>
+</body>
+</html>

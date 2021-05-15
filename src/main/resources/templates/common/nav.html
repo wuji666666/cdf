@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+    <div class="col-xs-1" th:fragment="nav" style="background-color: black">
+        <ul class="nav nav-tab vertical-tab" role="tablist" id="vtab" >
+            <li class="sidebar-brand">
+                <a href="#">卖家管理系统</a>
+            </li>
+
+            <li role="presentation" class="active">
+                <a href="/cdf/seller/product/list" aria-controls="home" >查询商品</a>
+            </li>
+            <li role="presentation">
+                <a href="/cdf/seller/product/category" aria-controls="inbox">新增商品</a>
+            </li>
+
+            <li role="presentation">
+                <a href="/cdf/seller/logout" aria-controls="outbox" >登出</a>
+            </li>
+
+            <li role="presentation">
+                <a  href="/cdf/seller/find"  aria-controls="outbox">个人信息</a>
+            </li>
+
+
+        </ul>
+
+</div>
+</body>
+</html>

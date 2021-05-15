@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head th:replace="common/header :: header"></head>
+<style>
+
+</style>
+<body>
+<div class="container" style="margin-top: 30px;">
+    <div style="height: 100px;">
+        <div th:replace="common/nav :: nav"></div>
+            <div class="tab-content vertical-tab-content col-xs-11">
+                <div role="tabpanel" class="tab-pane active" >
+                     <div class="row clearfix">
+
+                            <form  role="form" action="/cdf/seller/product/add" method="post">
+                                <div class="form-group">
+                                    <label for="first_category" class="col-sm-1 control-label" style="margin-top: 5px;">一级目录</label>
+                                    <div class="col-sm-3" >
+                                        <select class="form-control" id="first_category" name="first_category">
+                                            <option th:each="firstCategory:${firstCategorys}"         th:text="${firstCategory}" ></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="second_category" class="col-sm-1 control-label" style="margin-top: 5px;">二级目录</label>
+                                    <div class="col-sm-3">
+                                        <select class="form-control" id="second_category" name="second_category">
+                                            <option th:each="secondCategory:${secondCategorys}"     th:text="${secondCategory}"   ></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" >
+                                    <label for="third_category" class="col-sm-1 control-label" style="margin-top: 5px;">三级目录</label>
+                                    <div class="col-sm-3">
+                                        <select class="form-control" id="third_category" name="third_category">>
+                                            <option th:each="thirdCategory:${thirdCategorys}" th:text="${thirdCategory}"> </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" >
+                                    <label for="product_name" class="col-sm-1 control-label" style="margin-top: 25px;">产品名称</label>
+                                    <div class="col-sm-3" style="margin-top: 20px;" >
+                                        <input type="text" class="form-control" id="product_name" name="product_name" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="brand_name" class="col-sm-1 control-label" style="margin-top: 25px;">品牌名称</label>
+                                    <div class="col-sm-3" style="margin-top: 20px;">
+                                        <input type="text" class="form-control" id="brand_name" name="brand_name"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="product_title" class="col-sm-1 control-label" style="margin-top: 25px;">标题</label>
+                                    <div class="col-sm-3" style="margin-top: 20px;">
+                                        <input type="text" class="form-control" id="product_title" name="product_title"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" >
+                                    <label for="cost_price" class="col-sm-1 control-label" style="margin-top: 25px;">商品原价</label>
+                                    <div class="col-sm-3" style="margin-top: 20px;">
+                                        <input type="text" class="form-control" id="cost_price" name="cost_price"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" >
+                                    <label for="discount_price" class="col-sm-1 control-label" style="margin-top: 25px;">折扣价格</label>
+                                    <div class="col-sm-3" style="margin-top: 20px;">
+                                        <input type="text" class="form-control" id="discount_price"  name="discount_price"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" >
+                                    <label for="product_stock" class="col-sm-1 control-label" style="margin-top: 25px;">库存量</label>
+                                    <div class="col-sm-3" style="margin-top: 20px;">
+                                        <input type="text" class="form-control" id="product_stock" name="product_stock"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" >
+                                    <label for="product_icon" class="col-sm-1 control-label" style="margin-top: 25px;">图片地址</label>
+                                    <div class="col-sm-11" style="margin-top: 20px;">
+                                        <input type="text" class="form-control" id="product_icon" name="product_icon"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" >
+                                    <label for="product_description" class="col-sm-1 control-label" style="margin-top: 40px;">商品描述</label>
+                                    <div class="col-sm-11" style="margin-top: 20px;">
+                                        <textarea cols="50"  class="form-control" id="product_description" style="overflow: hidden;" name="product_description"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10" style="margin-top: 20px; text-align: center;">
+                                        <button type="submit" class="btn btn-info" >提交</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+</body>
+</html>

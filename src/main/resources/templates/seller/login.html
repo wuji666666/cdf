@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="common/header :: header"></head>
+
+</head>
+<style>
+    body{
+        background-color: black;
+    }
+    .container{
+        width: 1200px;
+        height:300px;
+        background-color: blanchedalmond;
+        margin-top: 70px;
+    }
+    h3{
+        margin-left: 500px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        color: black;
+    }
+</style>
+<body>
+<div class="container" id="app">
+    <div class="row clearfix">
+        <div class="col-md-8 column">
+            <h3 >登录界面</h3>
+            <form class="form-horizontal" role="form" method="post" action="/cdf/seller/login/system">
+                <div class="form-group"  >
+                    <label for="username" class="col-sm-2 col-sm-push-4 control-label">用户名：</label>
+                    <div class="col-sm-5 col-sm-push-4" >
+                        <input type="text" class="form-control" id="username" name="username" />
+                    </div>
+                    <span class="col-sm-3 col-sm-push-4 " id="usernameError" style="color: #ff0000;margin-top: 5px;" th:text="${error}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 col-sm-push-4 control-label">密码：</label>
+                    <div class="col-sm-5 col-sm-push-4 ">
+                        <input type="password" class="form-control" id="password" name="password"/>
+                    </div>
+                    <span class="col-sm-3 col-sm-push-4 " id="passwordError" style="color: #ff0000;margin-top: 5px;"></span>
+                </div>
+
+                <div class="form-group">
+                    <div class=" col-sm-push-7 col-sm-3">
+                        <button type="submit" class="btn info">登录</button>
+                        <a type="" class="btn info" href="/cdf/seller/register" style="background-color: beige">注册</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+        $("#username").blur(function (){
+                $("#usernameError").html();
+                $("#usernameError").show();
+            const value=$("#username").val();
+            if(value.length===0 || value==""){
+                $("#usernameError").html();
+                $("#usernameError").html("用户名不能为空");
+            }
+            if(value.length>0 || value!=""){
+                $("#usernameError").hide();
+            }
+        });
+
+        $("#password").blur(function (){
+                $("#passwordError").html();
+                $("#passwordError").show();
+            const value=$("#password").val();
+            if(value.length==0 || value==""){
+                $("#passwordError").html("密码不能为空");
+            }
+            if(value.length>0 && value.length<6 ){
+                $("#passwordError").html("密码不能小于6位数");
+            }
+            if(value.length>=6 ){
+                $("#passwordError").hide();
+            }
+        });
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

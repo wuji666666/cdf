@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <head th:replace="common/header :: header"></head>
+
+</head>
+<style>
+    body{
+        background-color: black;
+    }
+    .container{
+        width: 1200px;
+        height:400px;
+        background-color: blanchedalmond;
+        margin-top: 70px;
+    }
+    h3{
+        margin-left: 500px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        color: black;
+    }
+</style>
+<body>
+<div class="container" id="app">
+    <div class="row clearfix">
+        <div class="col-md-8 column">
+            <h3 >注册界面</h3>
+            <form class="form-horizontal" role="form" method="post" action="/cdf/seller/register/system">
+                <div class="form-group" >
+                    <label for="username" class="col-sm-2 col-sm-push-4 control-label">用户名：</label>
+                    <div class="col-sm-5 col-sm-push-4" >
+                        <input type="text" class="form-control" id="username" name="username" />
+                    </div>
+                    <span class="col-sm-3 col-sm-push-4 " id="usernameError" style="color: #ff0000;margin-top: 5px;" th:text="${errorUsername}" ></span>
+                </div>
+
+                <div class="form-group" >
+                    <label for="phone" class="col-sm-2 col-sm-push-4 control-label">移动电话：</label>
+                    <div class="col-sm-5 col-sm-push-4" >
+                        <input type="text" class="form-control" id="phone" name="phone_number" />
+                    </div>
+                    <span class="col-sm-3 col-sm-push-4 " id="phoneError" style="color: #ff0000;margin-top: 5px;" th:text="${phoneError}"></span>
+                </div>
+
+                <div class="form-group" >
+                    <label for="email" class="col-sm-2 col-sm-push-4 control-label">电子邮箱：</label>
+                    <div class="col-sm-5 col-sm-push-4" >
+                        <input type="email" class="form-control" id="email" name="email" />
+                    </div>
+                    <span class="col-sm-3 col-sm-push-4 " id="emailError" style="color: #ff0000;margin-top: 5px;" th:text="${emailError}"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 col-sm-push-4 control-label">新密码：</label>
+                    <div class="col-sm-5 col-sm-push-4 ">
+                        <input type="password" class="form-control" id="password" name="password"/>
+                    </div>
+                    <span class="col-sm-3 col-sm-push-4 " id="passwordError" style="color: #ff0000;margin-top: 5px;"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPWD" class="col-sm-2 col-sm-push-4 control-label">确认密码：</label>
+                    <div class="col-sm-5 col-sm-push-4 ">
+                        <input type="password" class="form-control" id="confirmPWD" name="confirmPWD"/>
+                    </div>
+                    <span class="col-sm-3 col-sm-push-4 " id="confirmPWDError" th:text="${errorPWD}" style="color: #ff0000;margin-top: 5px;"></span>
+                </div>
+
+                <div class="form-group">
+                    <div class=" col-sm-push-7 col-sm-3">
+                        <button type="submit" class="btn info" style="background-color: aliceblue;color: black;">注册</button>
+                        <a type="submit" class="btn info" href="/cdf/seller/login" style="background-color: aliceblue">登录</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+        $("#username").blur(function (){
+            $("#usernameError").html();
+            $("#usernameError").show();
+            const value=$("#username").val();
+            if(value.length===0 || value==""){
+                $("#usernameError").html();
+                $("#usernameError").html("用户名不能为空");
+            }
+            if(value.length>0 || value!=""){
+                $("#usernameError").hide();
+            }
+        });
+
+        $("#password").blur(function (){
+            $("#passwordError").html();
+            $("#passwordError").show();
+            const value=$("#password").val();
+            if(value.length==0 || value==""){
+                $("#passwordError").html("密码不能为空");
+            }
+            if(value.length>0 && value.length<6 ){
+                $("#passwordError").html("密码不能小于6位数");
+            }
+            if(value.length>=6 ){
+                $("#passwordError").hide();
+            }
+        });
+
+        $("#confirmPWD").blur(function (){
+            $("#confirmPWDError").html();
+            $("#confirmPWDError").show();
+            const value=$("#password").val();
+            const confireValue=$("#confirmPWD").val();
+            if(value!=confireValue){
+                $("#confirmPWDError").html("密码前后不一致");
+            }
+            if(value==confireValue){
+                $("#confirmPWDError").html();
+                $("#confirmPWDError").hide();
+
+            }
+        });
+
+        $("#phone").blur(function (){
+            $("#phoneError").html();
+            $("#phoneError").show();
+            const value=$("#phone").val();
+            if(value.length==0){
+                $("#phoneError").html("电话号码不能为空");
+            }
+
+           const reg=/^[1][3,4,5,7,8][0-9]{9}$/;
+           const result=reg.test(value)
+            if(value.length>0 && !result){
+                $("#phoneError").html("电话号码格式不正确");
+            }
+            if(result){
+                $("#phoneError").html();
+                $("#phoneError").hide();
+            }
+        });
+
+        $("#email").blur(function (){
+            $("#emailError").html();
+            $("#emailError").show();
+            let value=$("#email").val();
+            if(value.length==0){
+                $("#emailError").html("邮箱不能为空");
+            }
+            let reg=/^([a-zA-Z_0-9-])+@([a-zA-Z_0-9-])+(.[a-zA-Z_0-9-])+$/;
+            let result=reg.test(value)
+            if(value.length>0 && !result){
+                $("#emailError").html("邮箱格式不正确");
+            }
+            if(result){
+                $("#emailError").html();
+                $("#emailError").hide();
+            }
+        });
+
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yong.cdf.mapper.ProductInfoMapper">
+    <insert id="addProduct" parameterType="com.yong.cdf.entity.ProductInfo" >
+          insert into product_info
+    (product_id,product_name,cost_price,discount_price,product_stock,product_description,product_icon,first_category,second_category,third_category,product_title,brand_name)
+          values
+    (#{product_id},#{product_name},#{cost_price},#{discount_price},#{product_stock},#{product_description},#{product_icon},#{first_category},#{second_category},#{third_category},#{product_title},#{brand_name})
+    </insert>
+
+    <select id="findByMsg" resultType="com.yong.cdf.entity.ProductInfo" >
+        select * from product_info
+        where first_category=#{productMsg} or second_category=#{productMsg} or third_category=#{productMsg} or brand_name=#{productMsg} or product_name like concat("%",#{productMsg},"%") or product_description like concat("%",#{productMsg},"%")
+    </select>
+
+    <select id="findById" resultType="com.yong.cdf.entity.ProductInfo">
+        select * from product_info
+        where product_id=#{id}
+    </select>
+
+    <update id="updateProductInfo" parameterType="com.yong.cdf.entity.ProductInfo">
+        update product_info
+        <trim prefix="set" suffixOverrides=",">
+            <if test="product_name!=null">
+                product_name=#{product_name},
+            </if>
+            <if test=" product_title!=null">
+                product_title=#{product_title},
+            </if>
+
+            <if test="cost_price!=null">
+                cost_price=#{cost_price},
+            </if>
+            <if test="discount_price!=null">
+                discount_price=#{discount_price},
+            </if>
+            <if test="product_stock!=null">
+                product_stock=#{product_stock},
+            </if>
+            <if test="product_description!=null">
+                product_description=#{product_description},
+            </if>
+            <if test="product_icon!=null">
+                product_icon=#{product_icon},
+            </if>
+            <if test="first_category!=null">
+                first_category=#{first_category},
+            </if>
+            <if test="second_category!=null">
+                second_category=#{second_category},
+            </if>
+            <if test="third_category!=null">
+                third_category=#{third_category},
+            </if>
+
+            <if test="brand_name!=null">
+                brand_name=#{brand_name},
+            </if>
+
+            <if test="product_type!=null">
+                product_type=#{product_type},
+            </if>
+
+        </trim>
+        where product_id=#{product_id}
+    </update>
+
+    <select id="findAll" resultType="com.yong.cdf.entity.ProductInfo">
+        select * from product_info
+        where first_category=#{productMsg} or second_category=#{productMsg} or third_category=#{productMsg} or brand_name=#{productMsg} or product_name like concat("%",#{productMsg},"%") or product_description like concat("%",#{productMsg},"%")
+    </select>
+
+    <select id="findBySaleQuantity" resultType="com.yong.cdf.entity.ProductInfo">
+        select * from product_info
+        where first_category=#{productMsg} or second_category=#{productMsg} or third_category=#{productMsg} or brand_name=#{productMsg} or product_name like concat("%",#{productMsg},"%") or product_description like concat("%",#{productMsg},"%")
+        order by sale_quantity desc
+    </select>
+
+    <select id="findByCreateTime" resultType="com.yong.cdf.entity.ProductInfo">
+        select * from product_info
+        where create_time <![CDATA[>=]]> #{lastDate} and first_category=#{productMsg} or second_category=#{productMsg} or third_category=#{productMsg} or brand_name=#{productMsg} or product_name like concat("%",#{productMsg},"%") or product_description like concat("%",#{productMsg},"%")
+        order by create_time desc
+    </select>
+
+    <select id="findByPriceAsc" resultType="com.yong.cdf.entity.ProductInfo">
+        select * from product_info
+        where first_category=#{productMsg} or second_category=#{productMsg} or third_category=#{productMsg} or brand_name=#{productMsg} or product_name like concat("%",#{productMsg},"%") or product_description like concat("%",#{productMsg},"%")
+        order by discount_price asc
+    </select>
+
+    <select id="findByPriceDesc" resultType="com.yong.cdf.entity.ProductInfo">
+        select * from product_info
+        where first_category=#{productMsg} or second_category=#{productMsg} or third_category=#{productMsg} or brand_name=#{productMsg} or product_name like concat("%",#{productMsg},"%") or product_description like concat("%",#{productMsg},"%")
+        order by discount_price desc
+    </select>
+
+    <select id="findByPageGroupDesc" resultType="com.yong.cdf.VO.ProductInfoPageSortVO">
+        select  product_name,sum(sale_quantity) total_quantity from product_info
+        group by product_name
+        order by sum(sale_quantity) desc
+    </select>
+
+    <select id="findByFirstCategory" resultType="com.yong.cdf.entity.ProductInfo">
+        select * from product_info
+        where first_category=#{firstCategory}
+    </select>
+
+    <select id="findNewGoods"  resultType="com.yong.cdf.entity.ProductInfo">
+        select * from product_info
+        where  create_time <![CDATA[>=]]> #{lastDate}
+
+    </select>
+
+    <select id="findFirstCategory" resultType="String">
+        select distinct(first_category) first_category
+        from product_info
+    </select>
+
+    <select id="findSecondCategory"  resultType="String">
+        select distinct(second_category)
+        from product_info
+        where first_category=#{firstCategory}
+    </select>
+
+    <select id="findThirdCategory" resultType="String">
+        select distinct(third_category)
+        from product_info
+        where second_category=#{second_category}
+    </select>
+
+    <select id="findBrandName" resultType="String">
+        select distinct(brand_name) brand_name
+        from product_info
+    </select>
+
+    <select id="findByIds" resultType="com.yong.cdf.entity.ProductInfo" parameterType="string">
+         select * from product_info
+         <foreach collection="ids" item="id"  separator="," open="where product_id in ("  close=")">
+            #{id}
+         </foreach>
+    </select>
+
+    <select id="findGoodsList" resultType="com.yong.cdf.entity.ProductInfo" >
+        select * from product_info
+    </select>
+
+    <select id="findSecondCategoryList" resultType="String">
+        select distinct(second_category) from product_info
+    </select>
+
+    <select id="findThirdCategoryList" resultType="String">
+        select distinct(third_category) from product_info
+    </select>
+
+</mapper>

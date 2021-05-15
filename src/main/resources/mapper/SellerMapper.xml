@@ -1,0 +1,23 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yong.cdf.mapper.SellerMapper">
+    <insert id="addUser" parameterType="com.yong.cdf.entity.CdfSeller">
+        insert into cdf_seller
+            (user_id,username,password,phone_number,email)
+        values
+            (#{user_id},#{username},#{password},#{phone_number},#{email})
+    </insert>
+
+    <select id="findByUsername" resultType="com.yong.cdf.entity.CdfSeller">
+        select * from cdf_seller
+        where username=#{username}
+    </select>
+
+    <update id="updateSeller" parameterType="com.yong.cdf.entity.CdfSeller">
+        update cdf_seller
+        set phone_number=#{phone_number},email=#{email},password=#{password}
+        where username=#{username}
+    </update>
+
+</mapper>
